@@ -1,0 +1,77 @@
+aid: royal-lepage
+url: https://raw.githubusercontent.com/api-evangelist/royal-lepage/refs/heads/main/apis.yml
+name: Royal LePage
+kind: company
+description: >-
+  Royal LePage is Canada's largest residential real estate brokerage brand,
+  founded in Toronto in 1913 as A.E. LePage and operated today under franchise and
+  corporately-owned brokerages by Bridgemarq Real Estate Services (TSX: BRE), an affiliate
+  of Brookfield. It spans roughly 20,000 licensed REALTORS across 600-plus offices
+  nationwide, and sits in the value chain as a brokerage/franchisor rather than as
+  a data platform. Its consumer search at royallepage.ca is a downstream CONSUMER of
+  listing data, not a publisher of it - the site states its inventory is "226,755
+  active MLS listings via the CREA DDF network," meaning the machine-readable feed
+  belongs to the Canadian Real Estate Association's Data Distribution Facility, not
+  to Royal LePage. On API posture the honest finding is that there is none published
+  for developers - no developer portal, no documented API, no OpenAPI or OData $metadata,
+  no RESO Web API or Data Dictionary certification anywhere in evidence (RESO is a
+  US NAR-adjacent regime and is simply absent from the Canadian brokerage layer), and
+  no SDKs, webhooks, or Postman collections. Account registration on the site creates
+  a Virtual Office Website (VOW) relationship with Royal LePage Real Estate Services,
+  Brokerage that restricts data to personal, non-commercial use, and the legal notice
+  expressly forbids "spiders, robots, crawlers, data mining tools, or the like." Any
+  programmatic access to the underlying Canadian listing record runs through CREA
+  membership and the DDF licence, not through Royal LePage.
+accessModel:
+  pricing: unknown
+  onboarding: none-published
+  trial: false
+  try_now: false
+  public: false
+  label: No published developer access · Licensed listing data via CREA DDF
+  confidence: high
+  source:
+  - website
+  - terms-of-service
+  generated: '2026-07-26'
+  method: manual
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/groq.png
+tags:
+- Real Estate
+- Canada
+- Property Listings
+- MLS
+- Brokerage
+- IDX
+- VOW
+- Residential Real Estate
+- Franchise
+- PropTech
+created: '2026-07-26'
+modified: '2026-07-26'
+specificationVersion: '0.19'
+apis: []
+common:
+- type: Website
+  url: https://www.royallepage.ca/en/
+- type: About
+  url: https://www.royallepage.ca/en/realestate/about-us/
+- type: ParentCompany
+  url: https://www.bridgemarq.com/
+- type: Portal
+  url: https://www.rlpnetwork.com/
+- type: Newsroom
+  url: https://www.royallepage.ca/en/realestate/about-us/media-room/
+- type: Research
+  url: https://www.royallepage.ca/en/realestate/house-prices/
+- type: TermsOfService
+  url: https://www.royallepage.ca/en/realestate/legal-notice/
+- type: PrivacyPolicy
+  url: https://www.royallepage.ca/en/realestate/privacy-policy/
+- type: LinkedIn
+  url: https://ca.linkedin.com/company/royal-lepage
+- type: GitHubProfile
+  url: https://github.com/RoyalLePage
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

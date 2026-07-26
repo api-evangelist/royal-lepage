@@ -1,0 +1,260 @@
+aid: royal-lepage
+name: Royal LePage
+review:
+  question: Does Royal LePage expose a documented, publicly reachable developer API
+    for Canadian residential listing, valuation, or transaction data?
+  answer: false
+  date: '2026-07-26'
+  reviewer: API Evangelist
+  homeMarket: Canada
+  tier: brokerage
+  summary: |
+    No. Royal LePage publishes no developer surface of any kind. Every
+    developer-shaped hostname and path was probed on 2026-07-26 and either
+    404'd, or resolved to a wildcard DNS record pointing at the kvCORE
+    agent-website platform behind a Cloudflare managed challenge. The
+    company is a downstream CONSUMER of Canadian listing data under a CREA
+    Data Distribution Facility (DDF) licence, not a publisher of it, and its
+    own legal notice bans automated access outright. There is no RESO
+    footprint whatsoever - which is the expected and honest answer for a
+    Canadian brokerage, since RESO certification is a US NAR-adjacent regime
+    and Canadian syndication runs through CREA's DDF instead.
+
+resoPosture:
+  certified: false
+  posture: no RESO reference found
+  verbatim: |
+    Nothing on royallepage.ca, in its legal notice, or in the RESO
+    certification material references RESO in any form. There is no RESO Web
+    API certification, no RESO Data Dictionary certification (no 1.7, no
+    2.0), no listing in the RESO certification directory, no Reso/OData
+    endpoint, no $metadata document, and no use of the RESO Universal
+    Property Identifier (UPI). This is structural, not an oversight: RESO
+    certification is organised around US MLSs under NAR, and Canadian
+    residential listing syndication instead runs through CREA's single
+    national Data Distribution Facility (DDF), which Royal LePage consumes
+    as a licensee. Royal LePage is a brokerage/franchisor, not an MLS, so it
+    would not be the certifying party even in a RESO market.
+  evidence:
+  - probe: https://www.reso.org/certification/
+    status: 200
+    note: RESO's own certification page points at certification.reso.org and
+      reso.org/certificates for the live directory; it names no Canadian
+      organizations, no CREA, and no Royal LePage.
+  - probe: https://www.royallepage.ca/$metadata
+    status: 404
+    note: No OData service document or metadata contract served.
+  - probe: site-wide content scan of https://www.royallepage.ca/en/
+    status: 200
+    note: Zero occurrences of RESO, OData, Data Dictionary, or UPI. The only
+      standards vocabulary present is CREA's - MLS, REALTOR, DDF, VOW, IDX.
+
+accessGate:
+  gate: none-published
+  gated: true
+  whatADeveloperMustSignOrJoin: |
+    Royal LePage offers a developer nothing to sign, because it offers no
+    developer programme. There are three real gates layered underneath it,
+    and none of them is a Royal LePage developer key:
+
+    1. CONSUMER (VOW). Creating an account on royallepage.ca is explicitly a
+       Virtual Office Website relationship. Verbatim from the site: "Registering
+       an account creates a Virtual Office Website (VOW) relationship between
+       Royal LePage Real Estate Services, Brokerage and the Registrant," and
+       "the property data obtained from the VOW is only for the Registrant's
+       personal, non-commercial use." This is a consumer login, not an API.
+    2. AUTOMATED ACCESS PROHIBITED. The legal notice states the user "will not
+       use automated means, including spiders, robots, crawlers, data mining
+       tools, or the like to download or scrape data from the Site," and will
+       not "collect, copying, displaying, posting, transferring, 'scrapping',
+       'data mining', saving, storing, selling, manipulating, disseminating,
+       distributing/redistributing, retransmitting, reproducing, publishing,
+       broadcasting, sharing, licensing or sublicensing any of the data on the
+       Site." There is no API carve-out.
+    3. THE ACTUAL DATA SEAM IS CREA, NOT ROYAL LEPAGE. The site footer states:
+       "The property information on this website is derived from Royal LePage
+       listings and the Canadian Real Estate Association's Data Distribution
+       Facility (DDF)." A developer who wants this data programmatically goes
+       to CREA - which requires REALTOR/CREA membership or an authorised
+       technology-provider arrangement and a DDF licence - not to Royal LePage.
+    4. AGENTS/FRANCHISEES. rlpnetwork.com is the members-only network portal.
+       It is a WordPress login wall; every path, including
+       /.well-known/openid-configuration, 302s to /login. Access requires being
+       a Royal LePage agent or franchisee.
+  openData: false
+  openDataNote: |
+    No open data. Canada has no Royal-LePage-side equivalent of HM Land
+    Registry Price Paid or Ordnance Survey open products. Royal LePage does
+    publish recurring market research (the House Price Survey / National House
+    Price Composite and seasonal reports) as narrative press material with
+    HTML data tables, but nothing is offered as CSV, JSON, or an API, and it
+    is copyrighted marketing research rather than an open dataset. Canadian
+    land registration is provincial and largely privatised - Teranet operates
+    Ontario's registry under concession - so even the public record downstream
+    of this brand is a commercial product.
+
+authModel:
+  developerAuth: none - no API, therefore no API keys, OAuth clients, or scopes
+    are issued or documented
+  consumerAuth: Email/password account creation on royallepage.ca, plus social
+    login buttons labelled "Log in with Facebook" and "Log in with Google", with
+    an emailed verification code step. Consumer session only; no token is exposed
+    to a developer.
+  memberAuth: rlpnetwork.com form login (WordPress). No OpenID Connect discovery
+    document is served - https://www.rlpnetwork.com/.well-known/openid-configuration
+    redirects (302) to /login?redirectUrl=/.well-known/openid-configuration and
+    returns the login HTML with HTTP 200.
+  wellKnown:
+  - url: https://www.royallepage.ca/.well-known/openid-configuration
+    status: 404
+  - url: https://www.royallepage.ca/.well-known/security.txt
+    status: 404
+  - url: https://www.rlpnetwork.com/.well-known/openid-configuration
+    status: 200
+    note: 200 is the login page after redirect, not a discovery document.
+
+probes:
+  date: '2026-07-26'
+  method: curl -L, desktop User-Agent, 20-30s timeout
+  results:
+  - url: https://www.royallepage.ca/
+    status: 200
+    note: Redirects to /en/. Primary consumer site, hosted on Google App Engine
+      (ghs.googlehosted.com; robots.txt references rlpdotca.appspot.com).
+  - url: https://royallepage.ca/
+    status: 200
+  - url: https://developer.royallepage.ca/
+    status: 403
+    note: >-
+      NOT a developer portal. Wildcard DNS - CNAME customers.kvcore.com
+      (kvCORE / Inside Real Estate agent-site platform) behind a Cloudflare
+      managed challenge (response header "cf-mitigated" set to "challenge").
+      Confirmed wildcard because nonexistent-xyz123.royallepage.ca resolves
+      to exactly the same record.
+  - url: https://developers.royallepage.ca/
+    status: 403
+    note: Same wildcard to customers.kvcore.com. Not a developer portal.
+  - url: https://api.royallepage.ca/
+    status: 403
+    note: Same wildcard to customers.kvcore.com. Not an API host.
+  - url: https://docs.royallepage.ca/
+    status: 000
+    note: DNS resolves to ghs.google.com but no TLS/HTTP response returned.
+  - url: https://www.royallepage.ca/developers
+    status: 404
+  - url: https://www.royallepage.ca/api
+    status: 404
+  - url: https://www.royallepage.ca/en/api
+    status: 404
+  - url: https://www.royallepage.ca/api-docs
+    status: 404
+  - url: https://www.royallepage.ca/openapi.json
+    status: 404
+  - url: https://www.royallepage.ca/en/openapi.json
+    status: 404
+  - url: https://www.royallepage.ca/swagger.json
+    status: 404
+  - url: https://www.royallepage.ca/$metadata
+    status: 404
+  - url: https://www.royallepage.ca/sitemap.xml
+    status: 404
+  - url: https://www.royallepage.ca/robots.txt
+    status: 200
+    note: Real robots.txt. Disallows /profile, agent/office search paths, and
+      appspot hostnames; Crawl-delay 0.5. No Sitemap directive, no API paths.
+  - url: https://www.royallepage.ca/en/realestate/legal-notice/
+    status: 200
+    note: Terms of use. Source of the VOW, IDX, and anti-automation language.
+  - url: https://www.royallepage.ca/en/realestate/privacy-policy/
+    status: 200
+  - url: https://www.royallepage.ca/en/realestate/about-us/media-room/
+    status: 200
+    note: HTML newsroom. No RSS/Atom feed found (/en/blog/, /en/rss/,
+      /en/realestate/blog/ all 404).
+  - url: https://www.royallepage.ca/en/realestate/house-prices/
+    status: 200
+    note: House Price Survey / recreational property report research. HTML and
+      linked chart pages only; no CSV, JSON, or API offered.
+  - url: https://www.rlpnetwork.com/
+    status: 200
+    note: Redirects to /login. Members-only agent/franchisee portal (WordPress).
+  - url: https://api.github.com/orgs/royallepage
+    status: 404
+    note: No GitHub organization.
+  - url: https://api.github.com/users/RoyalLePage
+    status: 200
+    note: GitHub USER account "RoyalLePage" exists with 0 public repositories.
+      No SDKs, no specs, no sample code.
+
+artifacts:
+  openapi: []
+  odataMetadata: []
+  asyncapi: []
+  postman: []
+  sdks: []
+  webhooks: []
+  mcp: []
+  note: |
+    Nothing machine-readable was harvestable. The only structured document
+    served is a schema.org JSON-LD Organization graph embedded in the homepage
+    (@type Organization, foundingDate 1913, parentOrganization "Bridgemarq Real
+    Estate Services", areaServed Country Canada, logo
+    https://www.royallepage.ca/media/main/svg/logos/rlp_crec_logo_en.svg). That
+    is SEO metadata, not an API contract, so no openapi/ directory was created.
+
+valueChain:
+  role: Brokerage and franchisor (residential sales), not a listing platform or
+    data vendor.
+  parent: Bridgemarq Real Estate Services Inc. (TSX BRE), affiliate of Brookfield.
+    Sibling brands - Proprio Direct, Via Capitale, Johnston & Daniel, Les Immeubles
+    Mont-Tremblant.
+  brandOwnership: "Verbatim from the site footer: \"Royal LePage is a registered
+    Trademark of Royal Bank of Canada and is used under license by Bridgemarq Real
+    Estate Services.\""
+  dataUpstream: CREA Data Distribution Facility (DDF), the single national
+    syndication seam behind REALTOR.ca. Royal LePage displays DDF data as a
+    licensee; the DDF Web API and its access rules belong to CREA.
+  marketSeamNote: |
+    Canada's structure differs sharply from the US. One national cooperative
+    (CREA) runs REALTOR.ca and the DDF instead of ~500 MLSs, so there is one
+    contract to certify rather than hundreds - and none of them is RESO. Land
+    registration is provincial and largely privatised (Teranet holds long
+    concessions), so the public record itself is sold rather than opened. A
+    brokerage brand at Royal LePage's tier therefore has no reason to publish an
+    API and every contractual reason not to.
+
+sources:
+- url: https://www.royallepage.ca/en/
+  type: Website
+  note: '"Royal LePage is Canada''s leading real estate provider, offering 226,755
+    active MLS listings via the CREA DDF network." Confirms downstream consumer
+    posture. Also carries the VOW registration terms and the DDF attribution.'
+- url: https://www.royallepage.ca/en/realestate/legal-notice/
+  type: TermsOfService
+  note: Source of the anti-automation and non-commercial-use restrictions; no API
+    licensing provisions exist.
+- url: https://www.rlpnetwork.com/
+  type: Portal
+  note: Agent/franchisee login wall. Member-gated, no discovery document.
+- url: https://www.bridgemarq.com/
+  type: ParentCompany
+  note: Bridgemarq operates the Royal LePage, Proprio Direct, Via Capitale, Les
+    Immeubles Mont-Tremblant, and Johnston & Daniel brands.
+- url: https://www.reso.org/certification/
+  type: Standards
+  note: RESO certification directory pointers; no Canadian or Royal LePage entry.
+- url: https://api.github.com/users/RoyalLePage
+  type: GitHubProfile
+  note: User account, 0 public repos.
+
+actions:
+  apisListed: 0
+  apisYmlUpdated: true
+  openapiHarvested: false
+  reason: |
+    apis[] is intentionally EMPTY. Listing an API here would require inventing
+    one. No documented endpoint, base URL, spec, or auth scheme is published by
+    Royal LePage. The correct record of this organization is its identity, its
+    place in the Canadian value chain, and the precise shape of the closure -
+    licensed DDF data displayed under a VOW agreement, with automated access
+    contractually forbidden.
