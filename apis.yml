@@ -35,7 +35,7 @@ accessModel:
   - terms-of-service
   generated: '2026-07-26'
   method: manual
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/groq.png
+image: https://www.royallepage.ca/media/main/svg/logos/rlp_crec_logo_en.svg
 tags:
 - Real Estate
 - Canada
@@ -52,6 +52,8 @@ modified: '2026-07-26'
 specificationVersion: '0.19'
 apis: []
 common:
+- type: DomainSecurity
+  url: security/royal-lepage-domain-security.yml
 - type: Website
   url: https://www.royallepage.ca/en/
 - type: About
@@ -68,10 +70,34 @@ common:
   url: https://www.royallepage.ca/en/realestate/legal-notice/
 - type: PrivacyPolicy
   url: https://www.royallepage.ca/en/realestate/privacy-policy/
+- type: Support
+  url: https://www.royallepage.ca/en/realestate/contact-us/
+- type: Careers
+  url: https://www.royallepage.ca/en/realestate/join-us/
+- type: Accessibility
+  url: https://www.royallepage.ca/en/realestate/accessibility/
 - type: LinkedIn
   url: https://ca.linkedin.com/company/royal-lepage
+- type: Facebook
+  url: https://www.facebook.com/royallepage/
+- type: Instagram
+  url: https://www.instagram.com/royal_lepage
+- type: YouTube
+  url: https://www.youtube.com/user/RoyalLePageCanada
+- type: Wikipedia
+  url: https://en.wikipedia.org/wiki/Royal_LePage
+- type: Wikidata
+  url: https://www.wikidata.org/wiki/Q7374385
 - type: GitHubProfile
   url: https://github.com/RoyalLePage
+- type: LLMsTxt
+  url: llms/royal-lepage-llms.txt
+- type: Conformance
+  url: conformance/royal-lepage-conformance.yml
+- type: JSONLD
+  url: json-ld/royal-lepage-organization.jsonld
+- type: Packages
+  url: packages/royal-lepage-packages.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

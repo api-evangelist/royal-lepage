@@ -1,0 +1,108 @@
+generated: '2026-07-26'
+method: probed
+source: live HTTP probes of every Royal LePage host in apis.yml
+summary: |
+  No /.well-known/ discovery document is served anywhere in the Royal LePage
+  estate. The consumer site (royallepage.ca, Google App Engine) returns a hard
+  404 for every path. The member portal (rlpnetwork.com) appears to return 200
+  for several well-known paths, but every one of those is a SOFT 200: the host
+  301s any unknown path to /login?redirectUrl=<path> and serves an identical
+  2,101-byte "Login | rlpNetwork | Royal LePage" HTML page. Those are login-wall
+  responses, not discovery documents, and are recorded as such below so a later
+  round does not mistake them for a real OIDC/OAuth/api-catalog surface.
+hosts:
+- host: https://www.royallepage.ca
+  platform: Google App Engine (ghs.googlehosted.com)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /security.txt
+    status: 404
+  - path: /ai.txt
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /swagger.json
+    status: 404
+  - path: /api-docs
+    status: 404
+  - path: /graphql
+    status: 404
+  - path: /sitemap.xml
+    status: 404
+  - path: /robots.txt
+    status: 200
+    note: Real robots.txt; disallows /profile and agent/office search paths, Crawl-delay
+      0.5, no Sitemap directive, no API paths.
+- host: https://www.rlpnetwork.com
+  platform: Members-only agent/franchisee portal behind a form login
+  catch_all_redirect: true
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 200
+    real_document: false
+    note: 301 to /login?redirectUrl=/.well-known/openid-configuration, then the login
+      HTML page (text/html, 2101 bytes). Not an OIDC discovery document.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    real_document: false
+    note: Same login-wall redirect.
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    real_document: false
+    note: Same login-wall redirect.
+  - path: /.well-known/api-catalog
+    status: 200
+    real_document: false
+    note: Same login-wall redirect.
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /swagger.json
+    status: 404
+  - path: /api-docs
+    status: 200
+    real_document: false
+    note: Same login-wall redirect.
+  - path: /graphql
+    status: 200
+    real_document: false
+    note: Same login-wall redirect; no GraphQL endpoint (HTML, not application/json).
+  - path: /wp-json/
+    status: 200
+    real_document: false
+    note: Same login-wall redirect; no open WordPress REST surface.
+- host: https://api.royallepage.ca
+  platform: Wildcard DNS to customers.kvcore.com (Inside Real Estate agent-site platform)
+    behind a Cloudflare managed challenge
+  documents:
+  - path: /openapi.json
+    status: 403
+  - path: /v1/openapi.json
+    status: 403
+  note: Not a Royal LePage API host. nonexistent-xyz123.royallepage.ca resolves to
+    the same wildcard record.
+documents_found: 0
+apis_yml_pointer: none
+pointer_note: |
+  No `type: WellKnown` pointer is wired in apis.yml on purpose - zero real
+  discovery documents were found, and wiring the pointer would claim a
+  well-known catalog that does not exist. This file is kept as the negative
+  probe record so a later round does not re-run the same 30 probes.

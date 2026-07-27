@@ -1,0 +1,26 @@
+generated: '2026-07-26'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.royallepage.ca
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb  5 23:59:59 2027 GMT
+  hsts: false
+- host: www.rlpnetwork.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 29 23:59:59 2026 GMT
+  hsts: false
+domains:
+- domain: royallepage.ca
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none
+- domain: rlpnetwork.com
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false

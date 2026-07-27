@@ -1,0 +1,71 @@
+generated: '2026-07-26'
+method: searched
+source: https://www.royallepage.ca/en/ ; https://www.royallepage.ca/en/realestate/legal-notice/
+  ; https://www.reso.org/certification/ ; live probes recorded in review.yml
+summary: |
+  Royal LePage conforms to no machine-readable API standard, because it publishes
+  no API. This file records the negative result explicitly - and the reason, which
+  is structural rather than an oversight. Canadian residential listing syndication
+  runs through one national cooperative (CREA) and its Data Distribution Facility,
+  not through the ~500 US MLSs that RESO certification is organised around. Royal
+  LePage is a brokerage/franchisor and a DDF LICENSEE, so it consumes the standard
+  contract rather than publishing or certifying one.
+standards:
+- id: reso-web-api
+  conforms: false
+  evidence: No RESO Web API endpoint, no OData service document, no $metadata (404
+    at https://www.royallepage.ca/$metadata). No entry in the RESO certification directory.
+- id: reso-data-dictionary
+  conforms: false
+  evidence: No RESO Data Dictionary certification at any version (1.7 or 2.0); zero
+    occurrences of "RESO", "Data Dictionary", or "UPI" in a site-wide content scan.
+- id: odata-v4
+  conforms: false
+  evidence: No OData service root or $metadata document served on any host.
+- id: openapi
+  conforms: false
+  evidence: /openapi.json, /swagger.json, /api-docs all 404 on the consumer host and
+    403 (Cloudflare challenge, kvCORE wildcard) on api.royallepage.ca.
+- id: graphql
+  conforms: false
+  evidence: /graphql 404 on royallepage.ca; on rlpnetwork.com it is a login-wall soft
+    200 serving HTML, not a GraphQL endpoint.
+- id: asyncapi
+  conforms: false
+  evidence: No event, streaming, or webhook surface documented anywhere.
+- id: oauth2
+  conforms: false
+  evidence: No OAuth authorization server; /.well-known/oauth-authorization-server
+    404 on royallepage.ca and login-wall soft 200 on rlpnetwork.com.
+- id: openid-connect
+  conforms: false
+  evidence: No OIDC discovery document; consumer login offers Facebook/Google social
+    sign-in buttons but exposes no token or client registration to a developer.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: No API, therefore no error contract.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt 404 on both royallepage.ca and rlpnetwork.com.
+- id: schema-org
+  conforms: true
+  evidence: Homepage publishes a valid schema.org JSON-LD @graph (Organization, WebSite,
+    WebPage) - harvested verbatim to json-ld/royal-lepage-organization.jsonld. SEO
+    metadata, not an API contract.
+- id: crea-ddf
+  conforms: false
+  role: consumer
+  evidence: 'Site states its inventory is served "via the CREA DDF network" and the
+    footer attributes property information to "the Canadian Real Estate Association''s
+    Data Distribution Facility (DDF)". Royal LePage displays DDF data as a licensee;
+    the DDF Web API, its schema, and its access rules belong to CREA. Programmatic
+    access to the underlying record is obtained from CREA under REALTOR/CREA membership
+    or an authorised technology-provider arrangement - never from Royal LePage.'
+- id: vow-idx
+  conforms: true
+  role: operator
+  evidence: 'Legal notice: "Registering an account creates a Virtual Office Website
+    (VOW) relationship between Royal LePage Real Estate Services, Brokerage and the
+    Registrant," restricting data to "personal, non-commercial use". This is a CREA/board
+    display regime, not an API standard, and it forbids automated access outright.'
+compliance_program_published: false

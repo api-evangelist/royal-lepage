@@ -1,0 +1,58 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.royallepage.ca/#organization",
+      "name": "Royal LePage",
+      "alternateName": "Royal LePage Real Estate Services",
+      "url": "https://www.royallepage.ca/en/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://www.royallepage.ca/#logo",
+        "url": "https://www.royallepage.ca/media/main/svg/logos/rlp_crec_logo_en.svg"
+      },
+      "foundingDate": "1913",
+      "slogan": "Proudly Canadian",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Canada"
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Bridgemarq Real Estate Services"
+      },
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Royal_LePage",
+        "https://www.wikidata.org/wiki/Q7374385",
+        "https://ca.linkedin.com/company/royal-lepage",
+        "https://www.facebook.com/royallepage/",
+        "https://www.instagram.com/royal_lepage",
+        "https://www.youtube.com/user/RoyalLePageCanada"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.royallepage.ca/#website",
+      "url": "https://www.royallepage.ca/en/",
+      "name": "Royal LePage",
+      "inLanguage": "en-CA",
+      "publisher": {
+        "@id": "https://www.royallepage.ca/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.royallepage.ca/en/#webpage",
+      "url": "https://www.royallepage.ca/en/",
+      "name": "Canada Real Estate Listings and Homes for Sale | Royal LePage",
+      "isPartOf": {
+        "@id": "https://www.royallepage.ca/#website"
+      },
+      "about": {
+        "@id": "https://www.royallepage.ca/#organization"
+      },
+      "inLanguage": "en-CA"
+    }
+  ]
+}

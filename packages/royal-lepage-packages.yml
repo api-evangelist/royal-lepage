@@ -1,0 +1,21 @@
+generated: '2026-07-26'
+method: searched
+source: npm registry search, PyPI, GitHub user RoyalLePage
+summary: |
+  No first-party Royal LePage client library exists in any public package registry.
+  This is the expected result for a brokerage that publishes no API: there is no
+  contract for an SDK to wrap.
+packages: []
+registries_probed:
+- registry: npm
+  query: royallepage / "royal lepage"
+  result: 0 matching packages (the "royal *" hits are unrelated - @royalnavy/*, royal-mcp
+    for WordPress).
+- registry: pypi
+  query: royallepage
+  result: 404
+- registry: github
+  query: https://api.github.com/users/RoyalLePage/repos
+  result: GitHub USER account exists with 0 public repositories; no GitHub ORG (api.github.com/orgs/royallepage
+    404). No SDKs, specs, or sample code.
+official_sdks: 0

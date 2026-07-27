@@ -1,0 +1,23 @@
+generated: '2026-07-26'
+method: searched
+source: https://www.royallepage.ca/en/
+note: |
+  Harvested verbatim from the single application/ld+json block embedded in the
+  royallepage.ca homepage. This is schema.org SEO metadata, not an API contract -
+  it is the only machine-readable document Royal LePage publishes anywhere on its
+  public surface. Saved because it is real, structured, and provider-authored;
+  it must not be read as evidence of an API.
+documents:
+- file: royal-lepage-organization.jsonld
+  context: https://schema.org
+  graph_types:
+  - Organization
+  - WebSite
+  - WebPage
+  captures:
+  - name and alternateName (Royal LePage Real Estate Services)
+  - foundingDate 1913
+  - parentOrganization Bridgemarq Real Estate Services
+  - areaServed Country Canada
+  - logo https://www.royallepage.ca/media/main/svg/logos/rlp_crec_logo_en.svg
+  - sameAs identity links (Wikipedia, Wikidata, LinkedIn, Facebook, Instagram, YouTube)
