@@ -22,6 +22,17 @@ description: >-
   expressly forbids "spiders, robots, crawlers, data mining tools, or the like." Any
   programmatic access to the underlying Canadian listing record runs through CREA
   membership and the DDF licence, not through Royal LePage.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: none-published
