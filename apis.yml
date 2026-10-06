@@ -71,10 +71,12 @@ tags_raw:
 - PropTech
 - Real-Estate
 created: '2026-07-26'
-modified: '2026-07-26'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis: []
 common:
+- url: https://blog.royallepage.ca/feed/
+  type: BlogRSS
 - type: DomainSecurity
   url: security/royal-lepage-domain-security.yml
 - type: Website
