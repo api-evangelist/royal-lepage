@@ -1,0 +1,14 @@
+{
+  "repo": "royal-lepage",
+  "feeds": [
+    {
+      "source": "https://blog.royallepage.ca/feed/",
+      "feed_url": "https://blog.royallepage.ca/feed/",
+      "title": "",
+      "saved": 3,
+      "method": "feed"
+    }
+  ],
+  "post_count": 3,
+  "fetched": "2026-10-10T13:15:00Z"
+}
