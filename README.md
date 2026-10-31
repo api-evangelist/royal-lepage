@@ -1,4 +1,4 @@
-# Royal LePage (royal-lepage)
+# Royal LePage
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,76 +64,88 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Royal LePage is Canada's largest residential real estate brokerage brand, founded in Toronto in 1913 as A.E. LePage and operated today under franchise and corporately-owned brokerages by Bridgemarq Real Estate Services (TSX: BRE), an affiliate of Brookfield. It spans roughly 20,000 licensed REALTORS across 600-plus offices nationwide, and sits in the value chain as a brokerage/franchisor rather than as a data platform. Its consumer search at royallepage.ca is a downstream CONSUMER of listing data, not a publisher of it — the site states its inventory is "226,755 active MLS listings via the CREA DDF network," meaning the machine-readable feed belongs to the Canadian Real Estate Association's Data Distribution Facility, not to Royal LePage. On API posture the honest finding is that there is none published for developers — no developer portal, no documented API, no OpenAPI or OData `$metadata`, no RESO Web API or Data Dictionary certification anywhere in evidence, and no SDKs, webhooks, or Postman collections.
+Royal LePage is Canada's largest residential real estate brokerage brand, founded in Toronto in 1913 as A.E. LePage and operated today under franchise and corporately-owned brokerages by Bridgemarq Real Estate Services (TSX: BRE), an affiliate of Brookfield. It spans roughly 20,000 licensed REALTORS across 600-plus offices nationwide, and sits in the value chain as a brokerage/franchisor rather than as a data platform. Its consumer search at royallepage.ca is a downstream CONSUMER of listing data, not a publisher of it - the site states its inventory is "226,755 active MLS listings via the CREA DDF network," meaning the machine-readable feed belongs to the Canadian Real Estate Association's Data Distribution Facility, not to Royal LePage. On API posture the honest finding is that there is none published for developers - no developer portal, no documented API, no OpenAPI or OData $metadata, no RESO Web API or Data Dictionary certification anywhere in evidence (RESO is a US NAR-adjacent regime and is simply absent from the Canadian brokerage layer), and no SDKs, webhooks, or Postman collections. Account registration on the site creates a Virtual Office Website (VOW) relationship with Royal LePage Real Estate Services, Brokerage that restricts data to personal, non-commercial use, and the legal notice expressly forbids "spiders, robots, crawlers, data mining tools, or the like." Any programmatic access to the underlying Canadian listing record runs through CREA membership and the DDF licence, not through Royal LePage.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/royal-lepage/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/royal-lepage/refs/heads/main/apis.yml)
+**Areas:** Real Estate · Canada · Property Listings · MLS · Brokerage · IDX · VOW · Residential Real Estate · Franchise · PropTech
 
-## Tags
+## Royal LePage on APIs.io
 
-- Real Estate
-- Canada
-- Property Listings
-- MLS
-- Brokerage
-- IDX
-- VOW
-- Residential Real Estate
-- Franchise
-- PropTech
+Everything profiled for Royal LePage is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/royal-lepage/](https://apis.io/providers/royal-lepage/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-07-26
-- **Modified:** 2026-07-26
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### JSON-LD (1)
 
-None. Royal LePage publishes no documented public API. `apis[]` is intentionally empty — see `review.yml` for every URL probed and its HTTP status.
+Linked-data contexts for the provider's vocabulary.
 
-## RESO Posture
+- [Royal Lepage Organization Context](https://apis.io/jsonld/royal-lepage/royal-lepage-organization/)
 
-**No RESO reference found. Not certified.**
+#### Security (1)
 
-There is no RESO Web API certification, no RESO Data Dictionary certification (no 1.7, no 2.0), no entry in the RESO certification directory, no `Reso`/OData endpoint, no `$metadata` document, and no use of the RESO Universal Property Identifier (UPI). This is structural rather than an omission: RESO certification is organised around US MLSs under NAR, while Canadian residential listing syndication runs through CREA's single national Data Distribution Facility (DDF), which Royal LePage consumes as a licensee. A brokerage brand is not the certifying party in either regime.
+Authentication, trust centre, and vulnerability disclosure.
 
-## Access Gate
+- [Royal Lepage Domain Security](https://apis.io/security/royal-lepage/royal-lepage-domain-security/)
 
-**`none-published`** — gated.
+## Where to find this API
 
-A developer has nothing to sign with Royal LePage, because there is no developer programme. The real gates sit underneath:
-
-1. **Consumer (VOW).** Registering an account on royallepage.ca "creates a Virtual Office Website (VOW) relationship between Royal LePage Real Estate Services, Brokerage and the Registrant," and the data is "only for the Registrant's personal, non-commercial use."
-2. **Automated access prohibited.** The legal notice forbids "spiders, robots, crawlers, data mining tools, or the like." There is no API carve-out.
-3. **The data seam is CREA, not Royal LePage.** The site footer states the property information "is derived from Royal LePage listings and the Canadian Real Estate Association's Data Distribution Facility (DDF)." Programmatic access to that record goes through CREA membership and a DDF licence.
-4. **Agents and franchisees.** rlpnetwork.com is a members-only login wall.
-
-## Open Data
-
-**No.** Royal LePage publishes recurring market research (House Price Survey / National House Price Composite and seasonal reports) as HTML narrative and chart pages — no CSV, no JSON, no API, and it is copyrighted research rather than an open dataset. Canadian land registration is provincial and largely privatised (Teranet holds long concessions in Ontario), so the public record downstream of this brand is itself a commercial product.
-
-## Auth Model
-
-- **Developer:** none — no keys, OAuth clients, or scopes are issued or documented.
-- **Consumer:** email/password account creation with emailed verification code, plus "Log in with Facebook" and "Log in with Google" buttons.
-- **Member:** rlpnetwork.com WordPress form login. No OpenID Connect discovery document is served; `/.well-known/openid-configuration` redirects to `/login`.
-
-## Webhooks, Events, SDKs, Postman
-
-None found — the absence is the finding. There is no GitHub organization; a GitHub **user** account [RoyalLePage](https://github.com/RoyalLePage) exists with 0 public repositories.
-
-## Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.royallepage.ca/en/)
-- [About](https://www.royallepage.ca/en/realestate/about-us/)
-- [Parent Company](https://www.bridgemarq.com/)
-- [Portal — rlpNetwork (members only)](https://www.rlpnetwork.com/)
-- [Newsroom](https://www.royallepage.ca/en/realestate/about-us/media-room/)
-- [Research — House Price Survey](https://www.royallepage.ca/en/realestate/house-prices/)
-- [Terms of Service](https://www.royallepage.ca/en/realestate/legal-notice/)
-- [Privacy Policy](https://www.royallepage.ca/en/realestate/privacy-policy/)
-- [LinkedIn](https://ca.linkedin.com/company/royal-lepage)
-- [GitHub Profile](https://github.com/RoyalLePage)
+- [Support](https://www.royallepage.ca/en/realestate/contact-us/)
+- [Terms of service](https://www.royallepage.ca/en/realestate/legal-notice/)
+- [Privacy policy](https://www.royallepage.ca/en/realestate/privacy-policy/)
 
-## Maintainers
+## API Evangelist rating
 
-- Kin Lane — kin@apievangelist.com
+**Kin Score 15.4** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 49.1 |
+| Contract quality | 6.7 |
+| Contract governance | 18.2 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 14.3 |
+| Access clarity | 21.1 |
+
+**Agent readiness 0.0** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 17.6** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/royal-lepage/](https://apis.io/providers/royal-lepage/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Royal LePage: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/royal-lepage/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
